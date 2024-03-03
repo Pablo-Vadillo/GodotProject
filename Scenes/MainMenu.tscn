@@ -1,0 +1,64 @@
+[gd_scene load_steps=7 format=3 uid="uid://5pwg6cgopc6h"]
+
+[ext_resource type="Texture2D" uid="uid://dyvdpjpgspv82" path="res://Assets/PNG/environment/environment-preview.png" id="1_c5oqw"]
+[ext_resource type="Script" path="res://Scenes/MainMenu.gd" id="1_jgwc5"]
+[ext_resource type="Texture2D" uid="uid://b8hksvt4icury" path="res://Assets/PNG/Icono.png" id="2_14m6b"]
+[ext_resource type="StyleBox" uid="uid://bjlw3fx1lm6d" path="res://new_style_box_flat.tres" id="3_151mv"]
+[ext_resource type="Texture2D" uid="uid://d2s32572js87w" path="res://Assets/PNG/Controles.png" id="3_e4qo8"]
+[ext_resource type="Texture2D" uid="uid://r07oxouo43d3" path="res://Assets/PNG/Objetivo.png" id="5_oqfd5"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jgwc5")
+
+[node name="Environment-preview" type="Sprite2D" parent="."]
+position = Vector2(331, 174)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("1_c5oqw")
+
+[node name="Icono" type="Sprite2D" parent="."]
+position = Vector2(330, 116)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_14m6b")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(322, 263)
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("3_e4qo8")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(446, 182)
+scale = Vector2(0.07, 0.07)
+texture = ExtResource("5_oqfd5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -38.0
+offset_top = -33.0
+offset_right = 38.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("3_151mv")
+text = "Empezar"
+
+[node name="Button2" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("3_151mv")
+text = "Salir"
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button2" to="." method="_on_button_2_pressed"]

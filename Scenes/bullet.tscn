@@ -1,0 +1,82 @@
+[gd_scene load_steps=12 format=3 uid="uid://ba71ipoh7hie7"]
+
+[ext_resource type="Texture2D" uid="uid://dbph66dgyl4m5" path="res://Assets/PNG/spritesheets/Fx/shot.png" id="1_njgqr"]
+[ext_resource type="Texture2D" uid="uid://du8bktrrcehfe" path="res://Assets/PNG/spritesheets/Fx/impact.png" id="1_rsplq"]
+[ext_resource type="Script" path="res://Scripts/bullet.gd" id="3_awofm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wpamp"]
+atlas = ExtResource("1_rsplq")
+region = Rect2(0, 0, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lf65y"]
+atlas = ExtResource("1_rsplq")
+region = Rect2(12, 0, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l4uvn"]
+atlas = ExtResource("1_rsplq")
+region = Rect2(24, 0, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f87al"]
+atlas = ExtResource("1_rsplq")
+region = Rect2(36, 0, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jg34y"]
+atlas = ExtResource("1_njgqr")
+region = Rect2(0, 0, 6, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2u28h"]
+atlas = ExtResource("1_njgqr")
+region = Rect2(6, 0, 6, 4)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_veyp5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wpamp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lf65y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l4uvn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f87al")
+}],
+"loop": false,
+"name": &"explode",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jg34y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2u28h")
+}],
+"loop": true,
+"name": &"shot",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wmeq3"]
+radius = 3.16228
+
+[node name="Bullet" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_veyp5")
+animation = &"explode"
+script = ExtResource("3_awofm")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_wmeq3")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
